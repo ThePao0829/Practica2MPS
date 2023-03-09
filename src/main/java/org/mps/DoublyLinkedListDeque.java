@@ -16,21 +16,20 @@ public class DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
     @Override
     public void prepend(T value) {
         // TODO
-        DequeNode<T> aux = new DequeNode<>(value, null, null);
+        DequeNode<T> aux;
 
         if(size == 0){
+            aux = new DequeNode<>(value, null, null);
             this.first = aux;
             this.last = aux;
         }else{
-            if(this.first.equals(this.last)){
-                aux.setNext(this.last);
+            aux = new DequeNode<>(value, null, this.first);
+            if(size == 1){
                 this.last.setPrevious(aux);
-                this.first = aux;
             }else{
                 this.first.setPrevious(aux);
-                aux.setNext(this.first);
-                this.first = aux;
             }
+            this.first = aux;
         }
         this.size++;
     }
@@ -38,21 +37,20 @@ public class DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
     @Override
     public void append(T value) {
         // TODO
-        DequeNode<T> aux = new DequeNode<>(value, null, null);
+        DequeNode<T> aux;
 
         if(size == 0){
+            aux = new DequeNode<>(value, null, null);
             this.first = aux;
             this.last = aux;
         }else{
-            if(this.first.equals(this.last)){
-                aux.setPrevious(this.first);
+            aux = new DequeNode<>(value, this.last, null);
+            if(size == 1){
                 this.first.setNext(aux);
-                this.last = aux;
             }else{
                 this.last.setNext(aux);
-                aux.setPrevious(this.last);
-                this.last = aux;
             }
+            this.last = aux;
         }
         this.size++;
     }
@@ -63,7 +61,7 @@ public class DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
         if(this.first == null){
             throw new DoubleEndedQueueException("First is null");
         }else{
-            if(this.size==1){
+            if(this.size == 1){
                 this.first = null;
                 this.last = null;
             }else{
