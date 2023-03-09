@@ -17,26 +17,44 @@ public class DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
     public void prepend(T value) {
         // TODO
         DequeNode<T> aux = new DequeNode<>(value, null, null);
-        if(this.first == null){
-            aux.setNext(this.first);
+
+        if(size == 0){
             this.first = aux;
+            this.last = aux;
         }else{
-            this.first.setPrevious(aux);
-            aux.setNext(this.first);
+            if(this.first.equals(this.last)){
+                aux.setNext(this.last);
+                this.last.setPrevious(aux);
+                this.first = aux;
+            }else{
+                this.first.setPrevious(aux);
+                aux.setNext(this.first);
+                this.first = aux;
+            }
         }
+        this.size++;
     }
 
     @Override
     public void append(T value) {
         // TODO
         DequeNode<T> aux = new DequeNode<>(value, null, null);
-        if(this.last == null){
-            aux.setPrevious(this.last);
+
+        if(size == 0){
+            this.first = aux;
             this.last = aux;
         }else{
-            this.last.setNext(aux);
-            aux.setPrevious(this.last);
+            if(this.first.equals(this.last)){
+                aux.setPrevious(this.first);
+                this.first.setNext(aux);
+                this.last = aux;
+            }else{
+                this.last.setNext(aux);
+                aux.setPrevious(this.last);
+                this.last = aux;
+            }
         }
+        this.size++;
     }
 
     @Override
@@ -45,9 +63,18 @@ public class DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
         if(this.first == null){
             throw new DoubleEndedQueueException("First is null");
         }else{
-            DequeNode<T> aux = this.first;
-            this.first = aux.getNext();
-            this.first.setPrevious(null);
+            if(this.size==1){
+                this.first = null;
+                this.last = null;
+            }else{
+                if(this.first.getNext() == null){
+                    this.first = this.last;
+                }else{
+                    this.first = this.first.getNext();
+                    this.first.setPrevious(null);
+                }
+            }
+            this.size--;
         }
     }
 
@@ -57,16 +84,25 @@ public class DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
         if(this.last == null){
             throw new DoubleEndedQueueException("Last is null");
         }else{
-            DequeNode<T> aux = this.last;
-            this.last = aux.getPrevious();
-            this.last.setNext(null);
+            if(this.size == 1){
+                this.first = null;
+                this.last = null;
+            }else{
+                if(this.last.getPrevious() == null){
+                    this.last = this.first;
+                }else{
+                    this.last = this.last.getPrevious();
+                    this.last.setNext(null);
+                }
+            }
+            this.size--;
         }
     }
 
     @Override
     public T first() {
         // TODO
-        if(this.first.getItem()==null){
+        if(this.first == null){
             return null;
         }else{
             return this.first.getItem();
@@ -76,7 +112,11 @@ public class DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
     @Override
     public T last() {
         // TODO
-        return this.last.getItem();
+        if(this.last == null){
+            return null;
+        }else{
+            return this.last.getItem();
+        }
     }
 
     @Override
