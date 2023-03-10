@@ -65,12 +65,8 @@ public class DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
                 this.first = null;
                 this.last = null;
             }else{
-                if(this.first.getNext() == null){
-                    this.first = this.last;
-                }else{
-                    this.first = this.first.getNext();
-                    this.first.setPrevious(null);
-                }
+                this.first = this.first.getNext();
+                this.first.setPrevious(null);
             }
             this.size--;
         }
@@ -86,12 +82,8 @@ public class DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
                 this.first = null;
                 this.last = null;
             }else{
-                if(this.last.getPrevious() == null){
-                    this.last = this.first;
-                }else{
-                    this.last = this.last.getPrevious();
-                    this.last.setNext(null);
-                }
+                this.last = this.last.getPrevious();
+                this.last.setNext(null);
             }
             this.size--;
         }
