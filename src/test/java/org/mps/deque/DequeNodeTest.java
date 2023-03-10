@@ -78,6 +78,36 @@ class DequeNodeTest {
             }
 
         }
+        @Nested
+        @DisplayName("position tests cases")
+        class positionTest{
+
+           @Test
+           @DisplayName("is the first node")
+           void firstNodeTest(){
+               next = new DequeNode<>(2, node, null);
+               node.setNext(next);
+               assertTrue(node.isFirstNode());
+           }
+
+            @Test
+            @DisplayName("is the last node")
+            void lastNodeTest(){
+                previous = new DequeNode<>(0, null, node);
+                node.setPrevious(previous);
+                assertTrue(node.isLastNode());
+            }
+
+            @Test
+            @DisplayName("is not terminal node")
+            void notATerminalNodeTest(){
+                previous = new DequeNode<>(0, null, node);
+                node.setPrevious(previous);
+                next = new DequeNode<>(2, node, null);
+                node.setNext(next);
+                assertTrue(node.isNotATerminalNode());
+            }
+        }
     }
 
 
