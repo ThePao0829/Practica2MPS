@@ -7,7 +7,7 @@ package org.mps.deque;
  *
  * @param <T> the type of elements held in the deque.
  */
-    class DequeNode<T> {
+class DequeNode<T> {
     private T item;
     private DequeNode<T> previous;
     private DequeNode<T> next;
