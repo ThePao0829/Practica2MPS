@@ -13,8 +13,6 @@ class DequeNodeTest {
     DequeNode<Integer> queue;
     private DequeNode<Integer> previous;
     private DequeNode<Integer> next;
-
-
     private Integer item;
 
     @Test
@@ -25,7 +23,6 @@ class DequeNodeTest {
 
     @Nested
     @DisplayName("when new")
-
     class whenNew {
 
         @BeforeEach
