@@ -1,9 +1,9 @@
 package org.mps.deque;
 
-public class DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
+public class   DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
 
-    private org.mps.DequeNode<T> first;
-    private org.mps.DequeNode<T> last;
+    private org.mps.deque.DequeNode<T> first;
+    private org.mps.deque.DequeNode<T> last;
     private int size;
 
     public DoublyLinkedListDeque() {
@@ -16,14 +16,14 @@ public class DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
     @Override
     public void prepend(T value) {
         // TODO
-        org.mps.DequeNode<T> aux;
+        org.mps.deque.DequeNode<T> aux;
 
         if(size == 0){
-            aux = new org.mps.DequeNode<>(value, null, null);
+            aux = new org.mps.deque.DequeNode<>(value, null, null);
             this.first = aux;
             this.last = aux;
         }else{
-            aux = new org.mps.DequeNode<>(value, null, this.first);
+            aux = new org.mps.deque.DequeNode<>(value, null, this.first);
             if(size == 1){
                 this.last.setPrevious(aux);
             }else{
@@ -37,14 +37,14 @@ public class DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
     @Override
     public void append(T value) {
         // TODO
-        org.mps.DequeNode<T> aux;
+        org.mps.deque.DequeNode<T> aux;
 
         if(size == 0){
-            aux = new org.mps.DequeNode<>(value, null, null);
+            aux = new org.mps.deque.DequeNode<>(value, null, null);
             this.first = aux;
             this.last = aux;
         }else{
-            aux = new org.mps.DequeNode<>(value, this.last, null);
+            aux = new org.mps.deque.DequeNode<>(value, this.last, null);
             if(size == 1){
                 this.first.setNext(aux);
             }else{
