@@ -107,6 +107,22 @@ class DequeNodeTest {
                 node.setNext(next);
                 assertTrue(node.isNotATerminalNode());
             }
+
+            @Test
+            @DisplayName("is a terminal node")
+            void isATerminalNodeTest(){
+                previous = new DequeNode<>(0, null, node);
+                node.setPrevious(previous);
+                assertFalse(node.isNotATerminalNode());
+            }
+
+            @Test
+            @DisplayName("is a other terminal node")
+            void isAOtherTerminalNodeTest(){
+                next = new DequeNode<>(2, node, null);
+                node.setNext(next);
+                assertFalse(node.isNotATerminalNode());
+            }
         }
     }
 
