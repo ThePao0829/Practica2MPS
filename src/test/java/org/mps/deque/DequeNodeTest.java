@@ -1,39 +1,82 @@
 package org.mps.deque;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
-
+import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
+
 
 @DisplayName("A Integer queue")
 class DequeNodeTest {
 
-    DequeNode<Integer> queue;
-    private DequeNode<Integer> previous;
-    private DequeNode<Integer> next;
-    private Integer item;
-
-    @Test
-    @DisplayName("is instantiated with new DequeNode()")
-    void isInstantiatedWithNew(){
-        new DequeNode<>(item, previous, next);
-    }
+    DequeNode<Integer> node;
+    DequeNode<Integer> previous;
+    DequeNode<Integer> next;
 
     @Nested
     @DisplayName("when new")
-    class whenNew {
+    class TestCases {
+
 
         @BeforeEach
         void createNewQueue(){
-            queue = new DequeNode<>(item, previous, next);
+            node = new DequeNode<>(1, null, null);
         }
 
-        @Test
-        @DisplayName("is empty")
-        void isEmpty(){
-            assertTrue(queue == null);
+        @AfterEach
+        void shutdown(){
+            node = null;
+        }
+
+        @Nested
+        @DisplayName("Getters tests cases")
+        class gettersTest{
+            @Test
+            @DisplayName("get a queue's item")
+            void getItemTest(){
+                int expectedValue = 1;
+                assertEquals(expectedValue,node.getItem());
+            }
+
+            @Test
+            @DisplayName("get the previous")
+            void getPreviousTest(){
+                assertNull(node.getPrevious());
+            }
+            @Test
+            @DisplayName("get the next")
+            void getNextTest(){
+                assertNull(node.getNext());
+            }
+
+        }
+
+        @Nested
+        @DisplayName("Setters test cases")
+        class settersTests{
+
+            @Test
+            @DisplayName("Set the item")
+            void setItemCase(){
+                int expected = 2;
+                node.setItem(2);
+                assertEquals(expected, node.getItem());
+            }
+
+            @Test
+            @DisplayName("Set the previous")
+            void setPreviousCase(){
+                previous = new DequeNode<>(0, null, node);
+                node.setPrevious(previous);
+                assertEquals(previous, node.getPrevious());
+            }
+
+            @Test
+            @DisplayName("Set the next")
+            void setNextCase(){
+                next = new DequeNode<>(2, node, null);
+                node.setNext(next);
+                assertEquals(next, node.getNext());
+            }
+
         }
     }
 

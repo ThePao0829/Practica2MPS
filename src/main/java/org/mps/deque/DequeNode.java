@@ -17,7 +17,6 @@ class DequeNode<T> {
         this.previous = previous;
         this.next = next;
     }
-
     T getItem() {
         return item;
     }
@@ -51,6 +50,7 @@ class DequeNode<T> {
     }
 
     boolean isNotATerminalNode() {
+
         return !(isFirstNode() || isLastNode());
     }
 }
