@@ -327,6 +327,49 @@ class DoublyLinkedListDequeTest {
                 assertEquals(3, deque.get(2));
             }
 
+            @Test
+            @DisplayName("the last element of the index")
+            void lastIndexTest(){
+                assertEquals(6, deque.get(5));
+            }
+
+            @Test
+            @DisplayName("out of range of queue")
+            void OutOfRangeIndexTest(){
+                assertAll(
+                        ()-> assertThrows(IndexOutOfBoundsException.class, ()->deque.get(6)),
+                        ()-> assertThrows(IndexOutOfBoundsException.class, ()->deque.get(8)),
+                        ()-> assertThrows(IndexOutOfBoundsException.class, ()->deque.get(100))
+
+                );
+            }
+        }
+
+
+        @Nested
+        @DisplayName("contains tests cases")
+        class containsTest{
+            @BeforeEach
+            void setup(){
+                deque.prepend(3);
+                deque.prepend(2);
+                deque.prepend(1);
+                deque.append(4);
+                deque.append(5);
+                deque.append(6);
+            }
+
+            @Test
+            @DisplayName("A simple contains test")
+            void containsTest(){
+                assertAll(
+                        ()-> assertTrue(deque.contains(1)),
+                        ()-> assertTrue(deque.contains(2)),
+                        ()-> assertTrue(deque.contains(4)),
+                        ()-> assertFalse(deque.contains(8))
+                        );
+            }
+
         }
     }
 
