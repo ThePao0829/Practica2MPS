@@ -163,11 +163,53 @@ public class DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
 
     @Override
     public void remove(T value) {
+        if(this.first == null){
+            throw new DoubleEndedQueueException("Empty deque");
+        }
 
+        int count = 0;
+        DequeNode aux = this.first;
+        while(count < this.size()-1 && !aux.getItem().equals(value)){
+            count++;
+            aux = aux.getNext();
+        }
+
+        if(aux.getItem().equals(value)){
+            if(aux.isNotATerminalNode()){
+                aux.getPrevious().setNext(aux.getNext());
+                aux.getNext().setPrevious(aux.getPrevious());
+                this.size--;
+            }else{
+                if(aux.isFirstNode()){
+                    this.deleteFirst();
+                }else if(aux.isLastNode()){
+                    this.deleteLast();
+                }
+            }
+
+        }
     }
 
     @Override
     public void sort(Comparator<? super T> comparator) {
-        /*......*/
+        if(this.first == null){
+            throw new DoubleEndedQueueException("Empty deque");
+        }
+
+        int count = this.size();
+        T min;
+        for(int i=0; i<count; i++){
+            min = this.get(0);
+            for(int j=1; j<count-i; j++){
+                T aux = this.get(j);
+                if(comparator.compare(min, aux) > 0){
+                    min = aux;
+                }
+            }
+            if(!min.equals(this.get(0)) || i == count-1){
+                this.remove(min);
+                this.append(min);
+            }
+        }
     }
 }
