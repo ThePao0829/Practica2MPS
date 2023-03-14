@@ -339,7 +339,9 @@ class DoublyLinkedListDequeTest {
                 assertAll(
                         ()-> assertThrows(IndexOutOfBoundsException.class, ()->deque.get(6)),
                         ()-> assertThrows(IndexOutOfBoundsException.class, ()->deque.get(8)),
-                        ()-> assertThrows(IndexOutOfBoundsException.class, ()->deque.get(100))
+                        ()-> assertThrows(IndexOutOfBoundsException.class, ()->deque.get(100)),
+                        ()-> assertThrows(IndexOutOfBoundsException.class, ()->deque.get(-1))
+
 
                 );
             }
