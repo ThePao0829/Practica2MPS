@@ -98,7 +98,7 @@ public class DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
     public T first() {
         // TODO
         if(this.first == null){
-            return null;
+            throw new DoubleEndedQueueException("Empty deque");
         }else{
             return this.first.getItem();
         }
@@ -108,7 +108,7 @@ public class DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
     public T last() {
         // TODO
         if(this.last == null){
-            return null;
+            throw new DoubleEndedQueueException("Empty deque");
         }else{
             return this.last.getItem();
         }
