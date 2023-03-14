@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class DequeNodeTest {
 
     DequeNode<Integer> node;
-
     private DequeNode<Integer> previous;
     private DequeNode<Integer> next;
 
