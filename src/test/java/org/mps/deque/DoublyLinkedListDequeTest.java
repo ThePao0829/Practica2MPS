@@ -13,18 +13,19 @@ class DoublyLinkedListDequeTest {
 
     DoublyLinkedListDeque<Integer> deque;
 
+    @BeforeEach
+    void setup(){
+        deque = new DoublyLinkedListDeque<>();
+    }
+
+    @AfterEach
+    void down(){
+        deque = null;
+    }
+
     @Nested
     @DisplayName("DoublyLinkedListDequeTest")
     class TestCases{
-        @BeforeEach
-        void setup(){
-            deque = new DoublyLinkedListDeque<>();
-        }
-
-        @AfterEach
-        void down(){
-            deque = null;
-        }
 
         @Nested
         @DisplayName("Empty deque test cases")
@@ -296,10 +297,14 @@ class DoublyLinkedListDequeTest {
                 );
             }
         }
+    }
 
+    @Nested
+    @DisplayName("DoublyLinkedListDeque Complex Operations Test")
+    class complexTestCases{
         @Nested
-        @DisplayName("index tests cases")
-        class indexTest{
+        @DisplayName("Index tests cases")
+        class indexTestClass{
             @BeforeEach
             void setup(){
                 deque.prepend(3);
@@ -344,11 +349,9 @@ class DoublyLinkedListDequeTest {
                 );
             }
         }
-
-
         @Nested
-        @DisplayName("contains tests cases")
-        class containsTest{
+        @DisplayName("Contains tests cases")
+        class containsTestClass{
             @BeforeEach
             void setup(){
                 deque.prepend(3);
@@ -367,9 +370,106 @@ class DoublyLinkedListDequeTest {
                         ()-> assertTrue(deque.contains(2)),
                         ()-> assertTrue(deque.contains(4)),
                         ()-> assertFalse(deque.contains(8))
-                        );
+                );
             }
 
+        }
+        @Nested
+        @DisplayName("Remove test cases")
+        class removeTestClass{
+
+            @BeforeEach
+            void setup(){
+                deque.append(1);
+                deque.append(2);
+                deque.append(3);
+                deque.append(4);
+                deque.append(5);
+                deque.append(3);
+                deque.append(4);
+                deque.append(5);
+                deque.append(6);
+                deque.append(1);
+            }
+
+            @Test
+            @DisplayName("Remove once test and will remove the first ocurrence")
+            void removeOnceTest(){
+                int expected = 1;
+                int expectedSize = deque.size()-1;
+                deque.remove(expected);
+                assertAll(
+                        () -> assertEquals(expectedSize, deque.size()),
+                        () -> assertTrue(deque.contains(1)),
+                        () -> assertEquals(expected, deque.last())
+                );
+            }
+
+            @Test
+            @DisplayName("Remove twice test")
+            void removeTwiceTest(){
+                int expected = 1;
+                int expectedSize = deque.size()-2;
+                deque.remove(expected);
+                deque.remove(expected);
+                assertAll(
+                        () -> assertEquals(expectedSize, deque.size()),
+                        () -> assertFalse(deque.contains(expected))
+                );
+            }
+
+            @Test
+            @DisplayName("Remove no exist element, will do nothing")
+            void removeNoExistElementTest(){
+                int expected = 1;
+                int expectedSize = deque.size()-2;
+                deque.remove(expected);
+                deque.remove(expected);
+                deque.remove(expected);
+                assertAll(
+                        () -> assertEquals(expectedSize, deque.size()),
+                        () -> assertFalse(deque.contains(expected))
+                );
+            }
+        }
+        @Nested
+        @DisplayName("Sort test cases")
+        class sortTestClass{
+
+            @Test
+            @DisplayName("Normal sort test")
+            void sortTest(){
+                deque.append(5);
+                deque.append(4);
+                deque.append(3);
+                deque.append(2);
+                deque.append(1);
+                deque.sort(Integer::compareTo);
+
+                assertAll(
+                        () -> assertEquals(1, deque.first()),
+                        () -> assertEquals(5, deque.last())
+                );
+            }
+
+            @Test
+            @DisplayName("All same element sort test, will do nothing")
+            void allSameSortTest(){
+                deque.append(5);
+                deque.append(5);
+                deque.append(5);
+                deque.append(5);
+                deque.append(5);
+                DoublyLinkedListDeque<Integer> expected = deque;
+                deque.sort(Integer::compareTo);
+
+                assertAll(
+                        () -> assertSame(expected, deque),
+                        () -> assertEquals(5, deque.first()),
+                        () -> assertEquals(5, deque.last()),
+                        () -> assertEquals(5, deque.size())
+                );
+            }
         }
     }
 

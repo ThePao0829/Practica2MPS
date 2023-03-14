@@ -169,7 +169,7 @@ public class DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
 
         int count = 0;
         DequeNode aux = this.first;
-        while(count < this.size() && !aux.getItem().equals(value)){
+        while(count < this.size()-1 && !aux.getItem().equals(value)){
             count++;
             aux = aux.getNext();
         }
@@ -180,11 +180,14 @@ public class DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
                 aux.getNext().setPrevious(aux.getPrevious());
             }else{
                 if(aux.isFirstNode()){
-                    aux.getNext().setPrevious(null);
+                    this.first = aux.getNext();
+                    this.first.setPrevious(null);
                 }else if(aux.isLastNode()){
-                    aux.getPrevious().setNext(null);
+                    this.last = aux.getPrevious();
+                    this.last.setNext(null);
                 }
             }
+            this.size--;
         }
     }
 
@@ -200,8 +203,10 @@ public class DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
                     min = aux;
                 }
             }
-            this.remove(min);
-            this.append(min);
+            if(!min.equals(this.get(0)) || i == count-1){
+                this.remove(min);
+                this.append(min);
+            }
         }
     }
 }
