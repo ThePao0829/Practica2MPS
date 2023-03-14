@@ -7,7 +7,7 @@ import java.util.Comparator;
  * @author Longxiang Chen Chen
  */
 
-public class   DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
+public class DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
 
     private DequeNode<T> first;
     private DequeNode<T> last;
@@ -122,12 +122,45 @@ public class   DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
 
     @Override
     public T get(int index) {
-        return null;
+        T item;
+        DequeNode<T> node;
+        node = first;
+        int position = 0;
+        if(index == 0){
+            item = first.getItem();
+        }else{
+            while (node != null && position != index){
+                node = node.getNext();
+                position++;
+            }
+            if(node == null){
+                throw new IndexOutOfBoundsException("fuera del indice");
+            }
+            item = node.getItem();
+        }
+
+        return item;
     }
 
     @Override
     public boolean contains(T value) {
-        return false;
+        boolean contains = false;
+        DequeNode<T> node;
+        node = first;
+        if(first.getItem() == value){
+            contains = true;
+        }else {
+            while (node != null && node.getItem() != value){
+                node = node.getNext();
+            }
+            if(node == null){
+                throw new IndexOutOfBoundsException("fuera de la cola");
+            }else {
+                contains = true;
+            }
+        }
+
+        return contains;
     }
 
     @Override

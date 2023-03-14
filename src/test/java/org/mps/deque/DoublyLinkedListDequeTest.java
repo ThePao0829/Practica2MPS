@@ -296,6 +296,38 @@ class DoublyLinkedListDequeTest {
                 );
             }
         }
+
+        @Nested
+        @DisplayName("index tests cases")
+        class indexTest{
+            @BeforeEach
+            void setup(){
+                deque.prepend(3);
+                deque.prepend(2);
+                deque.prepend(1);
+                deque.append(4);
+                deque.append(5);
+                deque.append(6);
+            }
+            @Test
+            @DisplayName("the first element of the index")
+            void firstIndexTest(){
+                assertEquals(1, deque.get(0));
+            }
+
+            @Test
+            @DisplayName("the second element of the index")
+            void SecIndexTest(){
+                assertEquals(2, deque.get(1));
+            }
+
+            @Test
+            @DisplayName("the third element of the index")
+            void thirdIndexTest(){
+                assertEquals(3, deque.get(2));
+            }
+
+        }
     }
 
 }
