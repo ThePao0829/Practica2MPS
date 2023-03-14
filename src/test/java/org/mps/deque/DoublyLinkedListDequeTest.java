@@ -387,15 +387,19 @@ class DoublyLinkedListDequeTest {
                 deque.append(1);
                 deque.append(2);
                 deque.append(3);
-                deque.append(4);
-                deque.append(5);
-                deque.append(3);
-                deque.append(4);
-                deque.append(5);
-                deque.append(6);
                 deque.append(1);
             }
 
+            @Test
+            @DisplayName("Remove no terminal node test")
+            void removeNoTerminalTest(){
+                deque.remove(2);
+                assertAll(
+                        () -> assertEquals(3, deque.size()),
+                        () -> assertEquals(1, deque.first()),
+                        () -> assertEquals(1, deque.last())
+                );
+            }
             @Test
             @DisplayName("Remove once test and will remove the first ocurrence")
             void removeOnceTest(){
@@ -408,7 +412,6 @@ class DoublyLinkedListDequeTest {
                         () -> assertEquals(expected, deque.last())
                 );
             }
-
             @Test
             @DisplayName("Remove twice test")
             void removeTwiceTest(){
@@ -421,7 +424,6 @@ class DoublyLinkedListDequeTest {
                         () -> assertFalse(deque.contains(expected))
                 );
             }
-
             @Test
             @DisplayName("Remove no exist element, will do nothing")
             void removeNoExistElementTest(){
@@ -435,11 +437,19 @@ class DoublyLinkedListDequeTest {
                         () -> assertFalse(deque.contains(expected))
                 );
             }
+            @Test
+            @DisplayName("Throw expcetion if empty deque")
+            void emptyDeque(){
+                deque.remove(1);
+                deque.remove(2);
+                deque.remove(3);
+                deque.remove(1);
+                assertThrows(DoubleEndedQueueException.class, () -> deque.remove(5));
+            }
         }
         @Nested
         @DisplayName("Sort test cases")
         class sortTestClass{
-
             @Test
             @DisplayName("Normal sort test")
             void sortTest(){
@@ -455,7 +465,6 @@ class DoublyLinkedListDequeTest {
                         () -> assertEquals(5, deque.last())
                 );
             }
-
             @Test
             @DisplayName("All same element sort test, will do nothing")
             void allSameSortTest(){
@@ -473,6 +482,11 @@ class DoublyLinkedListDequeTest {
                         () -> assertEquals(5, deque.last()),
                         () -> assertEquals(5, deque.size())
                 );
+            }
+            @Test
+            @DisplayName("Can not sort empty deque")
+            void emptyDequeTest(){
+                assertThrows(DoubleEndedQueueException.class, () -> deque.sort(Integer::compareTo));
             }
         }
     }
