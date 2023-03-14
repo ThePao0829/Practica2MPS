@@ -371,7 +371,7 @@ class DoublyLinkedListDequeTest {
                         ()-> assertTrue(deque.contains(4)),
                         ()-> assertTrue(deque.contains(2)),
                         ()-> assertFalse(deque.contains(8))
-                        );
+                );
             }
 
         }
