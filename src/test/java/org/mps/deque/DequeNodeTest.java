@@ -3,16 +3,18 @@ package org.mps.deque;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+/***
+ * @author Fan Yang
+ * @author Longxiang Chen Chen
+ */
+
 
 @DisplayName("A Integer queue")
 class DequeNodeTest {
 
     DequeNode<Integer> node;
-    private DequeNode<Integer> previous;
-    private DequeNode<Integer> next;
-
-
-
+    DequeNode<Integer> previous;
+    DequeNode<Integer> next;
 
     @Nested
     @DisplayName("when new")
@@ -32,24 +34,23 @@ class DequeNodeTest {
         @Nested
         @DisplayName("Getters tests cases")
         class gettersTest{
-        @Test
-        @DisplayName("get a queue's item")
-        void getItemTest(){
-            int expectedValue = 1;
-            assertEquals(expectedValue,node.getItem());
-        }
+            @Test
+            @DisplayName("get a queue's item")
+            void getItemTest(){
+                int expectedValue = 1;
+                assertEquals(expectedValue,node.getItem());
+            }
 
-        @Test
-        @DisplayName("get the previous")
-        void getPreviousTest(){
-            assertNull(node.getPrevious());
-        }
-
-        @Test
-        @DisplayName("get the next")
-        void getNextTest(){
-            assertNull(node.getNext());
-        }
+            @Test
+            @DisplayName("get the previous")
+            void getPreviousTest(){
+                assertNull(node.getPrevious());
+            }
+            @Test
+            @DisplayName("get the next")
+            void getNextTest(){
+                assertNull(node.getNext());
+            }
 
         }
 
@@ -82,7 +83,6 @@ class DequeNodeTest {
             }
 
         }
-
         @Nested
         @DisplayName("position tests cases")
         class positionTest{
@@ -111,7 +111,6 @@ class DequeNodeTest {
                 next = new DequeNode<>(2, node, null);
                 node.setNext(next);
                 assertTrue(node.isNotATerminalNode());
-
             }
 
             @Test
@@ -130,7 +129,6 @@ class DequeNodeTest {
                 assertFalse(node.isNotATerminalNode());
             }
         }
-
     }
 
 
