@@ -33,8 +33,8 @@ class DoublyLinkedListDequeTest {
             @DisplayName("EmptyDeque")
             void emptyDeque(){
                 assertAll(
-                        () -> assertNull(deque.first()),
-                        () -> assertNull(deque.last()),
+                        () -> assertThrows(DoubleEndedQueueException.class, () -> deque.first()),
+                        () -> assertThrows(DoubleEndedQueueException.class, () -> deque.last()),
                         () -> assertEquals(0, deque.size())
                 );
             }
@@ -208,8 +208,8 @@ class DoublyLinkedListDequeTest {
                 deque.deleteFirst();
                 assertAll(
                         () -> assertEquals(0, deque.size()),
-                        () -> assertNull(deque.first()),
-                        () -> assertNull(deque.last())
+                        () -> assertThrows(DoubleEndedQueueException.class, () -> deque.first()),
+                        () -> assertThrows(DoubleEndedQueueException.class, () -> deque.last())
                 );
             }
         }
@@ -252,8 +252,8 @@ class DoublyLinkedListDequeTest {
                 deque.deleteLast();
                 assertAll(
                         () -> assertEquals(0, deque.size()),
-                        () -> assertNull(deque.first()),
-                        () -> assertNull(deque.last())
+                        () -> assertThrows(DoubleEndedQueueException.class, () -> deque.first()),
+                        () -> assertThrows(DoubleEndedQueueException.class, () -> deque.last())
                 );
             }
         }
@@ -290,8 +290,8 @@ class DoublyLinkedListDequeTest {
                 deque.deleteFirst();
                 deque.deleteLast();
                 assertAll(
-                        () -> assertNull(deque.first()),
-                        () -> assertNull(deque.last()),
+                        () -> assertThrows(DoubleEndedQueueException.class, () -> deque.first()),
+                        () -> assertThrows(DoubleEndedQueueException.class, () -> deque.last()),
                         () -> assertEquals(0, deque.size())
                 );
             }
