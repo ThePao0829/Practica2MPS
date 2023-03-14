@@ -177,20 +177,33 @@ public class DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
         }
 
         if(aux.getItem().equals(value)){
-            aux.getPrevious().setNext(aux.getNext());
-            aux.getNext().setPrevious(aux.getPrevious());
+            if(aux.isNotATerminalNode()){
+                aux.getPrevious().setNext(aux.getNext());
+                aux.getNext().setPrevious(aux.getPrevious());
+            }else{
+                if(aux.isFirstNode()){
+                    aux.getNext().setPrevious(null);
+                }else if(aux.isLastNode()){
+                    aux.getPrevious().setNext(null);
+                }
+            }
         }
     }
 
     @Override
     public void sort(Comparator<? super T> comparator) {
-        for(int i=0; i<this.size(); i++){
-            T aux = this.get(i);
-            for(int j=0; j<this.size(); j++){
-                if(true){
-
+        int count = this.size();
+        T min;
+        for(int i=0; i<count; i++){
+            min = this.get(0);
+            for(int j=1; j<count-i; j++){
+                T aux = this.get(j);
+                if(comparator.compare(min, aux) > 0){
+                    min = aux;
                 }
             }
+            this.remove(min);
+            this.append(min);
         }
     }
 }
