@@ -150,7 +150,7 @@ public class DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
         if(first.getItem() == value){
             contains = true;
         }else {
-            while (node != null && node.getItem() != value){
+            while (node != null && !(node.getItem().equals(value))){
                 node = node.getNext();
             }
             if(node != null){
