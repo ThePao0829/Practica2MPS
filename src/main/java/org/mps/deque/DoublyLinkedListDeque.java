@@ -153,9 +153,7 @@ public class DoublyLinkedListDeque<T> implements DoubleEndedQueue<T> {
             while (node != null && node.getItem() != value){
                 node = node.getNext();
             }
-            if(node == null){
-                throw new IndexOutOfBoundsException("fuera de la cola");
-            }else {
+            if(node != null){
                 contains = true;
             }
         }
