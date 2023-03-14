@@ -3,6 +3,11 @@ package org.mps.deque;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+/***
+ * @author Fan Yang
+ * @author Longxiang Chen Chen
+ */
+
 
 @DisplayName("A Integer queue")
 class DequeNodeTest {
